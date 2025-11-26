@@ -1,4 +1,3 @@
-import React from "react";
 import JusticeserverSite from "./JusticeserverSite";
 
 function App() {
