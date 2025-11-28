@@ -789,7 +789,7 @@ const ContactTab = ({
               Open email to Techbridge
             </button>
             {demoSubmitted && (
-              <p className="text-[11px] text-emerald-700">
+              <p className="text-xs text-emerald-700">
                 Email draft opened. If it did not appear, please check your email
                 client settings.
               </p>
@@ -798,8 +798,8 @@ const ContactTab = ({
         </form>
 
         <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800 shadow-sm">
-          <h3 className="text-sm font-semibold text-white">What to expect</h3>
-          <ul className="mt-2 ml-4 list-disc space-y-2 text-[11px] text-slate-700">
+          <h3 className="text-sm font-semibold text-slate-900">What to expect</h3>
+          <ul className="mt-2 ml-4 list-disc space-y-2 text-xs text-slate-700">
             <li>
               A member of the Techbridge Justiceserver team will review your
               note.
@@ -813,7 +813,7 @@ const ContactTab = ({
               technology landscape, and goals for Salesforce.
             </li>
           </ul>
-          <p className="mt-3 max-w-xs text-[11px] leading-snug text-slate-600">
+          <p className="mt-3 max-w-xs text-xs leading-snug text-slate-600">
             This form opens an email draft to the Techbridge Justiceserver team
             with the details you provide so they can follow up directly.
           </p>
@@ -1002,7 +1002,7 @@ const JusticeserverSite = () => {
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-4">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-[11px] text-slate-500 sm:flex-row lg:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-xs text-slate-500 sm:flex-row lg:px-6">
           <div className="flex items-center gap-2">
             <img
               src="https://techbridge.org/wp-content/uploads/2025/02/Techbridge-Justiceserver-Primary.svg"
