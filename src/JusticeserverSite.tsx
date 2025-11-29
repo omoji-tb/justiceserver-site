@@ -142,13 +142,13 @@ const HomeTab = () => {
             Justiceserver® by Techbridge®
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">
-            Justiceserver® is a Salesforce®-powered legal case management system from
-            Techbridge® with a design philosophy rooted in the real needs of legal
-            service organizations. The result is a system that is scalable, secure,
-            highly customizable, and capable of growing alongside each program’s
-            mission and progressing with the future of AI technology—without the
-            limitations of closed, proprietary systems that force LSOs to
-            compromise.
+            Justiceserver® is a Salesforce®-powered legal case management system
+            from Techbridge® with a design philosophy rooted in the real needs
+            of legal service organizations. The result is a system that is
+            scalable, secure, highly customizable, and capable of growing
+            alongside each program’s mission and progressing with the future of
+            AI technology—without the limitations of closed, proprietary systems
+            that force LSOs to compromise.
           </p>
         </div>
       </div>
@@ -172,8 +172,12 @@ const HomeTab = () => {
             <li>Modern intake, case management, and reporting in one system.</li>
             <li>Configurable workflows and data for each practice area.</li>
             <li>Real-time dashboards for staff, leadership, and funders.</li>
-            <li>Support for clinics, other services, referrals, and pro bono work.</li>
-            <li>Positioned to leverage Salesforce’s native AI capabilities.</li>
+            <li>
+              Support for clinics, other services, referrals, and pro bono work.
+            </li>
+            <li>
+              Positioned to leverage Salesforce’s native AI capabilities.
+            </li>
           </ul>
         </div>
       </div>
@@ -184,8 +188,8 @@ const HomeTab = () => {
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-slate-700">
           Justiceserver gives legal nonprofits a flexible, modern, and
-          comprehensive system for managing client services end-to-end—from intake
-          through case closure.
+          comprehensive system for managing client services end-to-end—from
+          intake through case closure.
         </p>
 
         <div className="mt-4 grid gap-6 md:grid-cols-2">
@@ -202,8 +206,8 @@ const HomeTab = () => {
                 checks, eligibility, and key client and matter details.
               </li>
               <li>
-                Financial eligibility tools that apply income and asset thresholds
-                consistently and support compliance.
+                Financial eligibility tools that apply income and asset
+                thresholds consistently and support compliance.
               </li>
               <li>
                 Comprehensive data collection for demographics, matter details,
@@ -798,7 +802,9 @@ const ContactTab = ({
         </form>
 
         <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800 shadow-sm">
-          <h3 className="text-sm font-semibold text-slate-900">What to expect</h3>
+          <h3 className="text-sm font-semibold text-slate-900">
+            What to expect
+          </h3>
           <ul className="mt-2 ml-4 list-disc space-y-2 text-xs text-slate-700">
             <li>
               A member of the Techbridge Justiceserver team will review your
@@ -880,7 +886,7 @@ const JusticeserverSite = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
           <button
@@ -980,25 +986,27 @@ const JusticeserverSite = () => {
         )}
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
-        {activeTab === "home" && <HomeTab />}
-        {activeTab === "why" && <WhyTab />}
-        {activeTab === "faq" && (
-          <FaqTab
-            faqCategory={faqCategory}
-            setFaqCategory={setFaqCategory}
-            openFaqId={openFaqId}
-            setOpenFaqId={setOpenFaqId}
-          />
-        )}
-        {activeTab === "contact" && (
-          <ContactTab
-            demoForm={demoForm}
-            demoSubmitted={demoSubmitted}
-            handleDemoChange={handleDemoChange}
-            handleDemoSubmit={handleDemoSubmit}
-          />
-        )}
+      <main className="flex-1 mx-auto max-w-6xl px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
+        <div className="min-h-[65vh]">
+          {activeTab === "home" && <HomeTab />}
+          {activeTab === "why" && <WhyTab />}
+          {activeTab === "faq" && (
+            <FaqTab
+              faqCategory={faqCategory}
+              setFaqCategory={setFaqCategory}
+              openFaqId={openFaqId}
+              setOpenFaqId={setOpenFaqId}
+            />
+          )}
+          {activeTab === "contact" && (
+            <ContactTab
+              demoForm={demoForm}
+              demoSubmitted={demoSubmitted}
+              handleDemoChange={handleDemoChange}
+              handleDemoSubmit={handleDemoSubmit}
+            />
+          )}
+        </div>
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-4">
