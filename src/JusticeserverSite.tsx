@@ -175,9 +175,7 @@ const HomeTab = () => {
             <li>
               Support for clinics, other services, referrals, and pro bono work.
             </li>
-            <li>
-              Positioned to leverage Salesforce’s native AI capabilities.
-            </li>
+            <li>Positioned to leverage Salesforce’s native AI capabilities.</li>
           </ul>
         </div>
       </div>
@@ -193,7 +191,7 @@ const HomeTab = () => {
         </p>
 
         <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm">
+          <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🧭
             </div>
@@ -224,7 +222,7 @@ const HomeTab = () => {
             </ul>
           </article>
 
-          <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm">
+          <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🗂️
             </div>
@@ -251,7 +249,7 @@ const HomeTab = () => {
             </ul>
           </article>
 
-          <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm">
+          <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               📊
             </div>
@@ -269,7 +267,7 @@ const HomeTab = () => {
             </ul>
           </article>
 
-          <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm">
+          <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🏛️
             </div>
@@ -283,7 +281,7 @@ const HomeTab = () => {
             </ul>
           </article>
 
-          <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm">
+          <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🧡
             </div>
@@ -297,7 +295,7 @@ const HomeTab = () => {
             </p>
           </article>
 
-          <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-sm">
+          <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               📤
             </div>
@@ -711,7 +709,7 @@ const ContactTab = ({
       <div className="mt-4 grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <form
           onSubmit={handleDemoSubmit}
-          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+          className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm"
         >
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
@@ -793,7 +791,7 @@ const ContactTab = ({
               Open email to Techbridge
             </button>
             {demoSubmitted && (
-              <p className="text-xs text-emerald-700">
+              <p className="text-[11px] text-emerald-700">
                 Email draft opened. If it did not appear, please check your email
                 client settings.
               </p>
@@ -802,10 +800,8 @@ const ContactTab = ({
         </form>
 
         <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800 shadow-sm">
-          <h3 className="text-sm font-semibold text-slate-900">
-            What to expect
-          </h3>
-          <ul className="mt-2 ml-4 list-disc space-y-2 text-xs text-slate-700">
+          <h3 className="text-sm font-semibold text-slate-900">What to expect</h3>
+          <ul className="mt-2 ml-4 list-disc space-y-2 text-[11px] text-slate-700">
             <li>
               A member of the Techbridge Justiceserver team will review your
               note.
@@ -819,7 +815,7 @@ const ContactTab = ({
               technology landscape, and goals for Salesforce.
             </li>
           </ul>
-          <p className="mt-3 max-w-xs text-xs leading-snug text-slate-600">
+          <p className="mt-3 max-w-xs text-[11px] leading-snug text-slate-600">
             This form opens an email draft to the Techbridge Justiceserver team
             with the details you provide so they can follow up directly.
           </p>
@@ -886,7 +882,7 @@ const JusticeserverSite = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
           <button
@@ -986,31 +982,29 @@ const JusticeserverSite = () => {
         )}
       </header>
 
-      <main className="flex-1 mx-auto max-w-6xl px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
-        <div className="min-h-[65vh]">
-          {activeTab === "home" && <HomeTab />}
-          {activeTab === "why" && <WhyTab />}
-          {activeTab === "faq" && (
-            <FaqTab
-              faqCategory={faqCategory}
-              setFaqCategory={setFaqCategory}
-              openFaqId={openFaqId}
-              setOpenFaqId={setOpenFaqId}
-            />
-          )}
-          {activeTab === "contact" && (
-            <ContactTab
-              demoForm={demoForm}
-              demoSubmitted={demoSubmitted}
-              handleDemoChange={handleDemoChange}
-              handleDemoSubmit={handleDemoSubmit}
-            />
-          )}
-        </div>
+      <main className="mx-auto flex min-h-[calc(100vh-160px)] max-w-6xl flex-col px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
+        {activeTab === "home" && <HomeTab />}
+        {activeTab === "why" && <WhyTab />}
+        {activeTab === "faq" && (
+          <FaqTab
+            faqCategory={faqCategory}
+            setFaqCategory={setFaqCategory}
+            openFaqId={openFaqId}
+            setOpenFaqId={setOpenFaqId}
+          />
+        )}
+        {activeTab === "contact" && (
+          <ContactTab
+            demoForm={demoForm}
+            demoSubmitted={demoSubmitted}
+            handleDemoChange={handleDemoChange}
+            handleDemoSubmit={handleDemoSubmit}
+          />
+        )}
       </main>
 
       <footer className="border-t border-slate-200 bg-white py-4">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-xs text-slate-500 sm:flex-row lg:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-[11px] text-slate-500 sm:flex-row lg:px-6">
           <div className="flex items-center gap-2">
             <img
               src="https://techbridge.org/wp-content/uploads/2025/02/Techbridge-Justiceserver-Primary.svg"
