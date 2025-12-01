@@ -1,6 +1,50 @@
 import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 
-const FAQ_ITEMS = [
+type TabId = "home" | "why" | "faq" | "contact";
+
+type FaqCategory =
+  | "intake"
+  | "case"
+  | "reporting"
+  | "ai"
+  | "platform"
+  | "community";
+
+type FaqCategoryFilter = "all" | FaqCategory;
+
+interface FaqItem {
+  id: number;
+  category: FaqCategory;
+  q: string;
+  a: string;
+}
+
+interface DemoFormState {
+  name: string;
+  org: string;
+  email: string;
+  role: string;
+  message: string;
+}
+
+interface FaqTabProps {
+  faqCategory: FaqCategoryFilter;
+  setFaqCategory: (id: FaqCategoryFilter) => void;
+  openFaqId: number | null;
+  setOpenFaqId: (id: number | null) => void;
+}
+
+interface ContactTabProps {
+  demoForm: DemoFormState;
+  demoSubmitted: boolean;
+  handleDemoChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleDemoSubmit: (e: FormEvent) => void;
+}
+
+const FAQ_ITEMS: FaqItem[] = [
   {
     id: 1,
     category: "platform",
@@ -75,7 +119,7 @@ const FAQ_ITEMS = [
   },
 ];
 
-const FAQ_CATEGORY_OPTIONS = [
+const FAQ_CATEGORY_OPTIONS: { id: FaqCategoryFilter; label: string }[] = [
   { id: "all", label: "All topics" },
   { id: "intake", label: "Intake & eligibility" },
   { id: "case", label: "Case management & time" },
@@ -85,7 +129,7 @@ const FAQ_CATEGORY_OPTIONS = [
   { id: "community", label: "Community & collaboration" },
 ];
 
-function HomeTab() {
+const HomeTab = () => {
   return (
     <section className="space-y-8 lg:space-y-10">
       <div className="max-w-5xl">
@@ -99,11 +143,11 @@ function HomeTab() {
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">
             Justiceserver® is a Salesforce®-powered legal case management system
-            from Techbridge® with a design philosophy rooted in the real needs of
-            legal service organizations. The result is a system that is scalable,
-            secure, highly customizable, and capable of growing alongside each
-            program’s mission and progressing with the future of AI
-            technology—without the limitations of closed, proprietary systems
+            from Techbridge® with a design philosophy rooted in the real needs
+            of legal service organizations. The result is a system that is
+            scalable, secure, highly customizable, and capable of growing
+            alongside each program’s mission and progressing with the future of
+            AI technology—without the limitations of closed, proprietary systems
             that force LSOs to compromise.
           </p>
         </div>
@@ -128,9 +172,7 @@ function HomeTab() {
             <li>Modern intake, case management, and reporting in one system.</li>
             <li>Configurable workflows and data for each practice area.</li>
             <li>Real-time dashboards for staff, leadership, and funders.</li>
-            <li>
-              Support for clinics, other services, referrals, and pro bono work.
-            </li>
+            <li>Support for clinics, other services, referrals, and pro bono work.</li>
             <li>Positioned to leverage Salesforce’s native AI capabilities.</li>
           </ul>
         </div>
@@ -233,9 +275,7 @@ function HomeTab() {
             <ul className="mt-2 ml-4 list-disc space-y-1 text-sm text-slate-700">
               <li>Tools to organize and track clinic calendars and outcomes.</li>
               <li>Register clients by calendar or search for open appointments.</li>
-              <li>
-                Support for volunteers to self-register and manage commitments.
-              </li>
+              <li>Support for volunteers to self-register and manage commitments.</li>
             </ul>
           </article>
 
@@ -262,8 +302,7 @@ function HomeTab() {
             </h3>
             <p className="mt-2 text-sm text-slate-700">
               Referral tools help LSOs log, manage, and transfer cases between
-              organizations, keeping client services connected across a
-              network.
+              organizations, keeping client services connected across a network.
             </p>
             <p className="mt-2 text-sm text-slate-700">
               A Pro Bono Portal add-on lets LSOs share opportunities with
@@ -275,9 +314,9 @@ function HomeTab() {
       </div>
     </section>
   );
-}
+};
 
-function WhyTab() {
+const WhyTab = () => {
   return (
     <section className="space-y-8 lg:space-y-10">
       <div>
@@ -293,7 +332,7 @@ function WhyTab() {
       </div>
 
       <div className="grid gap-6 text-sm md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🛡️
@@ -304,8 +343,8 @@ function WhyTab() {
           </div>
           <p className="mt-2 text-sm text-slate-700">
             Justiceserver benefits from Salesforce’s enterprise-grade security
-            and infrastructure, supporting organizations of different sizes
-            while protecting sensitive client data.
+            and infrastructure, supporting organizations of different sizes while
+            protecting sensitive client data.
           </p>
           <p className="mt-2 text-sm text-slate-700">
             Salesforce delivers three major releases each year, and Techbridge
@@ -314,7 +353,7 @@ function WhyTab() {
           </p>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               ⚙️
@@ -326,8 +365,7 @@ function WhyTab() {
           <p className="mt-2 text-sm text-slate-700">
             Many systems require every team to work the same way. Justiceserver
             is built so different practices can each have their own data points,
-            workflows, and outcomes while leadership still sees the big
-            picture.
+            workflows, and outcomes while leadership still sees the big picture.
           </p>
           <ul className="mt-2 ml-4 list-disc space-y-1 text-sm text-slate-700">
             <li>Page layouts tuned for each role.</li>
@@ -342,7 +380,7 @@ function WhyTab() {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🔗
@@ -368,7 +406,7 @@ function WhyTab() {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🤖
@@ -378,8 +416,8 @@ function WhyTab() {
             </h3>
           </div>
           <p className="mt-2 text-sm text-slate-700">
-            Justiceserver is positioned to use Salesforce’s AI ecosystem where
-            it makes sense for your organization, with additional licensing and
+            Justiceserver is positioned to use Salesforce’s AI ecosystem where it
+            makes sense for your organization, with additional licensing and
             configuration.
           </p>
           <ul className="mt-2 ml-4 list-disc space-y-1 text-sm text-slate-700">
@@ -398,7 +436,7 @@ function WhyTab() {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               📈
@@ -423,7 +461,7 @@ function WhyTab() {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🌐
@@ -550,8 +588,8 @@ function WhyTab() {
                   opportunities to influence future development.
                 </td>
                 <td className="px-3 py-2 text-sm text-slate-700">
-                  Roadmaps may be more vendor-driven with fewer opportunities
-                  for collaborative input.
+                  Roadmaps may be more vendor-driven with fewer opportunities for
+                  collaborative input.
                 </td>
               </tr>
             </tbody>
@@ -560,10 +598,15 @@ function WhyTab() {
       </div>
     </section>
   );
-}
+};
 
-function FaqTab({ faqCategory, setFaqCategory, openFaqId, setOpenFaqId }) {
-  const filteredFaqs =
+const FaqTab = ({
+  faqCategory,
+  setFaqCategory,
+  openFaqId,
+  setOpenFaqId,
+}: FaqTabProps) => {
+  const filteredFaqs: FaqItem[] =
     faqCategory === "all"
       ? FAQ_ITEMS
       : FAQ_ITEMS.filter((item) => item.category === faqCategory);
@@ -641,30 +684,30 @@ function FaqTab({ faqCategory, setFaqCategory, openFaqId, setOpenFaqId }) {
       </div>
     </section>
   );
-}
+};
 
-function ContactTab({
+const ContactTab = ({
   demoForm,
   demoSubmitted,
   handleDemoChange,
   handleDemoSubmit,
-}) {
+}: ContactTabProps) => {
   return (
-    <section className="flex flex-1 flex-col space-y-6 lg:space-y-8">
+    <section className="space-y-6 lg:space-y-8">
       <div className="max-w-3xl">
         <h2 className="text-xl font-semibold text-slate-900 sm:text-2xl">
           Talk to our team about Justiceserver
         </h2>
         <p className="mt-2 text-sm text-slate-700">
-          Share a few details so the Techbridge and Justiceserver team can tailor
-          the discussion to your organization.
+          Share a few details so the Techbridge and Justiceserver team can
+          tailor the discussion to your organization.
         </p>
       </div>
 
-      <div className="mt-4 grid flex-1 gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+      <div className="mt-4 grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <form
           onSubmit={handleDemoSubmit}
-          className="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm"
+          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
         >
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
@@ -724,7 +767,7 @@ function ContactTab({
             </div>
           </div>
 
-          <div className="mt-3 flex-1">
+          <div className="mt-3">
             <label className="text-xs font-medium text-slate-800">
               How can we help?
             </label>
@@ -738,7 +781,7 @@ function ContactTab({
             />
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-lg bg-cyan-700 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1"
@@ -754,26 +797,24 @@ function ContactTab({
           </div>
         </form>
 
-        <aside className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800 shadow-sm">
-          <div>
-            <h3 className="text-sm font-semibold text-slate-900">
-              What to expect
-            </h3>
-            <ul className="mt-2 ml-4 list-disc space-y-2 text-[11px] text-slate-700">
-              <li>
-                A member of the Techbridge Justiceserver team will review your
-                note.
-              </li>
-              <li>
-                You can expect a follow-up email to schedule time or request more
-                detail.
-              </li>
-              <li>
-                Conversations typically focus on your programs, caseload,
-                technology landscape, and goals for Salesforce.
-              </li>
-            </ul>
-          </div>
+        <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800 shadow-sm">
+          <h3 className="text-sm font-semibold text-slate-900">
+            What to expect
+          </h3>
+          <ul className="mt-2 ml-4 list-disc space-y-2 text-[11px] text-slate-700">
+            <li>
+              A member of the Techbridge Justiceserver team will review your
+              note.
+            </li>
+            <li>
+              You can expect a follow-up email to schedule time or request more
+              detail.
+            </li>
+            <li>
+              Conversations typically focus on your programs, caseload,
+              technology landscape, and goals for Salesforce.
+            </li>
+          </ul>
           <p className="mt-3 max-w-xs text-[11px] leading-snug text-slate-600">
             This form opens an email draft to the Techbridge Justiceserver team
             with the details you provide so they can follow up directly.
@@ -782,12 +823,12 @@ function ContactTab({
       </div>
     </section>
   );
-}
+};
 
-function JusticeserverSite() {
+const JusticeserverSite = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("home");
-  const [demoForm, setDemoForm] = useState({
+  const [activeTab, setActiveTab] = useState<TabId>("home");
+  const [demoForm, setDemoForm] = useState<DemoFormState>({
     name: "",
     org: "",
     email: "",
@@ -795,15 +836,17 @@ function JusticeserverSite() {
     message: "",
   });
   const [demoSubmitted, setDemoSubmitted] = useState(false);
-  const [openFaqId, setOpenFaqId] = useState(null);
-  const [faqCategory, setFaqCategory] = useState("all");
+  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+  const [faqCategory, setFaqCategory] = useState<FaqCategoryFilter>("all");
 
-  const handleDemoChange = (e) => {
+  const handleDemoChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setDemoForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleDemoSubmit = (e) => {
+  const handleDemoSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!demoForm.name || !demoForm.org || !demoForm.email) return;
 
@@ -830,7 +873,7 @@ function JusticeserverSite() {
     setDemoSubmitted(true);
   };
 
-  const setTab = (tab) => {
+  const setTab = (tab: TabId) => {
     setActiveTab(tab);
     setMobileNavOpen(false);
     if (typeof window !== "undefined") {
@@ -839,7 +882,7 @@ function JusticeserverSite() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col">
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
           <button
@@ -899,8 +942,7 @@ function JusticeserverSite() {
             onClick={() => setMobileNavOpen((open) => !open)}
             aria-label="Toggle navigation"
           >
-            <span className="sr-only">Toggle navigation</span>
-            <span className="block h-0.5 w-4 bg-slate-800" />
+            <span className="h-0.5 w-4 bg-slate-800" />
           </button>
         </div>
 
@@ -940,8 +982,8 @@ function JusticeserverSite() {
         )}
       </header>
 
-      <main className="mx-auto flex w-full max-w-6xl flex-1 px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
-        <div className="w-full">
+      <main className="flex-1 w-full">
+        <div className="mx-auto max-w-6xl px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
           {activeTab === "home" && <HomeTab />}
           {activeTab === "why" && <WhyTab />}
           {activeTab === "faq" && (
@@ -997,6 +1039,6 @@ function JusticeserverSite() {
       </footer>
     </div>
   );
-}
+};
 
 export default JusticeserverSite;
