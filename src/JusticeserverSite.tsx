@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent, FormEvent, FC } from "react";
 
 type TabId = "home" | "why" | "faq" | "contact";
 
@@ -41,7 +41,7 @@ interface ContactTabProps {
   handleDemoChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  handleDemoSubmit: (e: FormEvent) => void;
+  handleDemoSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 const FAQ_ITEMS: FaqItem[] = [
@@ -129,7 +129,7 @@ const FAQ_CATEGORY_OPTIONS: { id: FaqCategoryFilter; label: string }[] = [
   { id: "community", label: "Community & collaboration" },
 ];
 
-const HomeTab = () => {
+const HomeTab: FC = () => {
   return (
     <section className="space-y-8 lg:space-y-10">
       <div className="max-w-5xl">
@@ -142,9 +142,9 @@ const HomeTab = () => {
             Justiceserver® by Techbridge®
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">
-            Justiceserver® is a Salesforce®-powered legal case management system
-            from Techbridge® with a design philosophy rooted in the real needs
-            of legal service organizations. The result is a system that is
+            Justiceserver® is a Salesforce®-powered legal case management
+            system from Techbridge® with a design philosophy rooted in the real
+            needs of legal service organizations. The result is a system that is
             scalable, secure, highly customizable, and capable of growing
             alongside each program’s mission and progressing with the future of
             AI technology—without the limitations of closed, proprietary systems
@@ -172,7 +172,9 @@ const HomeTab = () => {
             <li>Modern intake, case management, and reporting in one system.</li>
             <li>Configurable workflows and data for each practice area.</li>
             <li>Real-time dashboards for staff, leadership, and funders.</li>
-            <li>Support for clinics, other services, referrals, and pro bono work.</li>
+            <li>
+              Support for clinics, other services, referrals, and pro bono work.
+            </li>
             <li>Positioned to leverage Salesforce’s native AI capabilities.</li>
           </ul>
         </div>
@@ -316,7 +318,7 @@ const HomeTab = () => {
   );
 };
 
-const WhyTab = () => {
+const WhyTab: FC = () => {
   return (
     <section className="space-y-8 lg:space-y-10">
       <div>
@@ -332,7 +334,7 @@ const WhyTab = () => {
       </div>
 
       <div className="grid gap-6 text-sm md:grid-cols-2">
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🛡️
@@ -353,7 +355,7 @@ const WhyTab = () => {
           </p>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               ⚙️
@@ -380,7 +382,7 @@ const WhyTab = () => {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🔗
@@ -406,7 +408,7 @@ const WhyTab = () => {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🤖
@@ -436,7 +438,7 @@ const WhyTab = () => {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               📈
@@ -461,7 +463,7 @@ const WhyTab = () => {
           </ul>
         </article>
 
-        <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+        <article className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-base">
               🌐
@@ -588,8 +590,8 @@ const WhyTab = () => {
                   opportunities to influence future development.
                 </td>
                 <td className="px-3 py-2 text-sm text-slate-700">
-                  Roadmaps may be more vendor-driven with fewer opportunities for
-                  collaborative input.
+                  Roadmaps may be more vendor-driven with fewer opportunities
+                  for collaborative input.
                 </td>
               </tr>
             </tbody>
@@ -600,12 +602,12 @@ const WhyTab = () => {
   );
 };
 
-const FaqTab = ({
+const FaqTab: FC<FaqTabProps> = ({
   faqCategory,
   setFaqCategory,
   openFaqId,
   setOpenFaqId,
-}: FaqTabProps) => {
+}) => {
   const filteredFaqs: FaqItem[] =
     faqCategory === "all"
       ? FAQ_ITEMS
@@ -648,7 +650,7 @@ const FaqTab = ({
           return (
             <div
               key={item.id}
-              className="rounded-2xl border border-slate-200 bg-white shadow-sm"
+              className="rounded-2xl border border-slate-200 bg-white text-sm shadow-sm"
             >
               <button
                 type="button"
@@ -686,12 +688,12 @@ const FaqTab = ({
   );
 };
 
-const ContactTab = ({
+const ContactTab: FC<ContactTabProps> = ({
   demoForm,
   demoSubmitted,
   handleDemoChange,
   handleDemoSubmit,
-}: ContactTabProps) => {
+}) => {
   return (
     <section className="space-y-6 lg:space-y-8">
       <div className="max-w-3xl">
@@ -704,10 +706,10 @@ const ContactTab = ({
         </p>
       </div>
 
-      <div className="mt-4 grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+      <div className="grid gap-6 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <form
           onSubmit={handleDemoSubmit}
-          className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+          className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm"
         >
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
@@ -781,7 +783,7 @@ const ContactTab = ({
             />
           </div>
 
-          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-4 flex items-center justify-between gap-3">
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-lg bg-cyan-700 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1"
@@ -798,9 +800,7 @@ const ContactTab = ({
         </form>
 
         <aside className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800 shadow-sm">
-          <h3 className="text-sm font-semibold text-slate-900">
-            What to expect
-          </h3>
+          <h3 className="text-sm font-semibold text-slate-900">What to expect</h3>
           <ul className="mt-2 ml-4 list-disc space-y-2 text-[11px] text-slate-700">
             <li>
               A member of the Techbridge Justiceserver team will review your
@@ -825,7 +825,7 @@ const ContactTab = ({
   );
 };
 
-const JusticeserverSite = () => {
+const JusticeserverSite: FC = () => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<TabId>("home");
   const [demoForm, setDemoForm] = useState<DemoFormState>({
@@ -844,9 +844,12 @@ const JusticeserverSite = () => {
   ) => {
     const { name, value } = e.target;
     setDemoForm((prev) => ({ ...prev, [name]: value }));
+    if (demoSubmitted) {
+      setDemoSubmitted(false);
+    }
   };
 
-  const handleDemoSubmit = (e: FormEvent) => {
+  const handleDemoSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!demoForm.name || !demoForm.org || !demoForm.email) return;
 
@@ -862,9 +865,11 @@ const JusticeserverSite = () => {
       demoForm.message || "(no message provided)",
     ].filter(Boolean);
 
-    const mailto = `mailto:${recipients.join(",")}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    const mailto = `mailto:${recipients.join(
+      ","
+    )}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      bodyLines.join("\n")
+    )}`;
 
     if (typeof window !== "undefined") {
       window.location.href = mailto;
@@ -882,7 +887,7 @@ const JusticeserverSite = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col">
+    <div className="flex min-h-screen flex-col bg-slate-50 font-sans text-slate-900">
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
           <button
@@ -938,10 +943,12 @@ const JusticeserverSite = () => {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white p-2 text-slate-700 md:hidden"
+            className="inline-flex flex-col items-center justify-center gap-1 rounded-lg border border-slate-300 bg-white p-2 text-slate-700 md:hidden"
             onClick={() => setMobileNavOpen((open) => !open)}
             aria-label="Toggle navigation"
           >
+            <span className="h-0.5 w-4 bg-slate-800" />
+            <span className="h-0.5 w-4 bg-slate-800" />
             <span className="h-0.5 w-4 bg-slate-800" />
           </button>
         </div>
@@ -982,8 +989,8 @@ const JusticeserverSite = () => {
         )}
       </header>
 
-      <main className="flex-1 w-full">
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 px-4 pb-16 pt-8 lg:px-6 lg:pt-12">
+        <div className="w-full">
           {activeTab === "home" && <HomeTab />}
           {activeTab === "why" && <WhyTab />}
           {activeTab === "faq" && (
